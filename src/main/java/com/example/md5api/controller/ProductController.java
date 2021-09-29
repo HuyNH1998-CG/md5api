@@ -42,7 +42,7 @@ public class ProductController {
     public ResponseEntity<?> createCategory(@Valid @RequestBody Product product, BindingResult bindingResult) {
         productValidator.validate(product, bindingResult);
         if (bindingResult.hasFieldErrors()) {
-            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
         Product product1 = productService.save(new Product(product.getName(), product.getPrice(), product.getDescription(), product.getCategory()));
         return new ResponseEntity<>(product1, HttpStatus.CREATED);
